@@ -3,10 +3,12 @@ import styles from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
 import { removeToken } from "../../utils/token";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "react-use-cart";
 // import { useState } from "react";
 
 function Navbar({user}) {
   // const [closeNav, setCloseNav] = useState(false)
+  const { totalItems } = useCart();
   const navigate = useNavigate();
   const logout = () => {
     removeToken();
@@ -42,6 +44,9 @@ function Navbar({user}) {
                 <Link className="nav-link" to="/menu">
                   Menu
                 </Link>
+              </li>
+              <li className="nav-item">
+              <Link to="/cart">Cart ({totalItems})</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/signin">

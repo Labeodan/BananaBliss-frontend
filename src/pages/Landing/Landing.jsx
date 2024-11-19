@@ -1,33 +1,13 @@
-import { useEffect, useState } from 'react';
 import styles from './Landing.module.scss';
-import { getProducts } from '../../services/products';
 import Bread from '../../components/Bread/Bread';
 import { Link } from 'react-router-dom';
 
-function Landing({setMenu}) {
-const [products, setProducts] = useState([])
+function Landing({products}) {
 
-useEffect(() => {
-  const getAllProducts = async () => {
+  const filteredProducts = products?.filter((product, i) => i < 4)
 
-    try {
-      const allProducts = await getProducts()
-      // console.log(allProducts.data)
-      
-      const filtered = allProducts.data.filter((product, i) => i < 4)
-      // console.log(filtered)
-      if (allProducts){
-        setProducts(filtered)
-        setMenu(allProducts.data)
-      }
-      
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
-  getAllProducts()
-}, [])
+
 
   return (
     <div>
@@ -48,7 +28,12 @@ useEffect(() => {
       <p>
         Explore our range of delicious, banana-inspired treats made with love and the finest ingredients.
       </p>
-      <Bread products={products}/>
+      <div className='productGallery'>
+      {filteredProducts.map(product => (
+
+        <Bread key={product.id} product={product}/>
+      ))}
+      </div>
     </section>
     </div>
   )

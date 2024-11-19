@@ -1,0 +1,82 @@
+
+  // Order Status Container
+  .orderStatusContainer {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+  
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-family: 'Georgia', serif;
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  // Order Cards
+  .orderCard {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .statusPending {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #f4d19a;
+    }
+
+    .statusAccepted {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #7c5d48;
+    }
+
+    .statusRejected {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #d9534f;
+    }
+      
+  
+    .orderMessage {
+      font-size: 1rem;
+      color: #5a4637;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+  }
+  
+  // Responsive Design
+  @media (max-width: 768px) {
+    .orderCard {
+      padding: 1.5rem;
+    }
+  }
+  
+  .loadingMessage {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7c5d48;
+  }
+  
+  .errorMessage {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #d9534f;
+  }
+
+
+
+  

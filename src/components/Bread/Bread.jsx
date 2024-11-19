@@ -1,16 +1,26 @@
 import styles from "./Bread.module.scss"
 import { useNavigate } from "react-router-dom"
+import { useCart } from "react-use-cart"
+import { getUser } from "../../utils/token"
 
-function Bread({products}) {
+
+function Bread({product}) {
     const navigate = useNavigate()
+    const user = getUser()
+    const {addItem} = useCart()
 
     const handleNavigate = (id) => {
-        navigate(`/menu/${id}`)
+        if (user === null) {
+            navigate("/signin")
+        } else {
+            navigate(`/menu/${id}`)
+        }
     }
+
+
   return (
-        <div className={styles.productGallery}>
-            {products.map((product) => (
-            <div key={product.id} className={styles.productCard} onClick={()=>{handleNavigate(product.id)}}>
+            <>
+            <div className={styles.productCard} onClick={()=>{handleNavigate(product.id)}}>
                 <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
@@ -20,9 +30,9 @@ function Bread({products}) {
                 )}
                 {product.price}
                 </div>
+                <button onClick={() => addItem(product)}>Add to cart</button>
             </div>
-            ))}
-        </div>
+                </>
   )
 }
 

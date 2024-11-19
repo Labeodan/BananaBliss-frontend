@@ -1,9 +1,9 @@
 
 
-.productGallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+// .productGallery {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+//     gap: 1.5rem;
 
     .productCard {
       background-color: #fff;
@@ -46,4 +46,4 @@
         }
       }
     }
-  }
+  // }
