@@ -1,0 +1,66 @@
+.banner {
+    background-image: url('/images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  
+    .overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 3rem;
+      border-radius: 8px;
+      max-width: 90%;
+    }
+  
+    h1 {
+      font-size: 3.5rem;
+      // font-family: 'Georgia', serif;
+    }
+  
+    .tagline {
+      font-size: 1.5rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .shopNow {
+      background-color: #f4d19a;
+      color: #5a4637;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s;
+  
+      &:hover {
+        background-color: #f4bf82;
+      }
+    }
+  }
+
+  
+  .productSection {
+    padding: 2rem;
+    text-align: center;
+  
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #a97f5a;
+    }
+  }
+  

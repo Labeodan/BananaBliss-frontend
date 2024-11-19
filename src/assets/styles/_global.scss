@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  background-image: url("../images/Screenshot\ 2024-11-18\ at\ 12.47.39.png");
+  background-size: cover;
+  opacity: 0.95;
+
+  background-position: center;
+  height: 100vh;
+}
+
+
+#root {
+  height: 100%;
+  
+}
+
+
+// * Typography
+
+h1,
+h3 {
+  margin: 7px 0px 14px 0px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+p {
+  margin: 0;
+  opacity: .6;
+  width: 100%;
+  font-size: 16px;
+  // text-align: justify;
+  line-height: 28px;
+}
+
+form {
+  input {
+    margin: 15px;
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  button {
+    margin: 15px;
+    border-radius: 8px;
+    height: 35px;
+    cursor: pointer;
+    background-color: #7c5d48;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+
+  }
+  .button:hover{
+    background-color: #5a4637;
+  }
+  h1 {
+    text-decoration: underline;
+  }
+  width: 100%;
+  color: #5a4637;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.form-container {
+  max-width: 500px;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  
+}

@@ -1,0 +1,31 @@
+.navbar{
+    nav {
+        background-color: #d8a65e !important; 
+        div {
+            a {
+                color:azure !important;
+            }
+            button {
+                color:azure !important;
+                border: none;
+            }
+            button:hover {
+                border: none !important;
+            }
+            div {
+                justify-content: end;
+
+                ul{
+                    li{
+                        margin-right: 14px;
+                        ul {
+                            background-color: red;
+                            
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
