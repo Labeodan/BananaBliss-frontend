@@ -19,7 +19,7 @@ export const createOrder = (formData) => {
 
 // * Update - Update a order by ID
 export const updateOrder = (orderId, formData) => {
-  return axios.put(`${ORDERS_BASE_URL}${orderId}/`, formData);
+  return axios.patch(`${ORDERS_BASE_URL}${orderId}/`, formData);
 };
 
 // * Delete - Delete a order by ID
