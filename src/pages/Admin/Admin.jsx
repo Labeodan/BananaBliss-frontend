@@ -88,7 +88,7 @@ const Admin = () => {
        <div className={styles.metrics}>
         <div className={styles.metricBox}>
           <p className={styles.metricTitle}>Total Sales</p>
-          <p>${orders.reduce((total, order) => total + Number(order.total_price), 0)}</p>
+          <p>${acceptedOrders.reduce((total, order) => total + Number(order.total_price), 0)}</p>
         </div>
         <div className={styles.metricBox}>
           <p className={styles.metricTitle}>Total Orders</p>
