@@ -1,7 +1,37 @@
-import styles from './Admin.module.scss';
-import { useState } from 'react';
-function Admin() {
+import { useState, useEffect } from "react";
+import styles from "./Admin.module.scss";
+import { getOrders } from "../../services/order";
+
+const Admin = () => {
+  const [orders, setOrders] = useState([]);
+  const [pendingOrders, setPendingOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isEditModalActive, setIsEditModalActive] = useState(false);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const allOrders = await getOrders();
+        if (allOrders) {
+          const fetchedOrders = allOrders.data;
+
+          // Filter pending orders and those with order_products
+          const filteredPendingOrders = fetchedOrders.filter(
+            (order) => order.status === "pending" && order.order_products.length > 0
+          );
+
+          setOrders(fetchedOrders);
+          setPendingOrders(filteredPendingOrders);
+        }
+      } catch (error) {
+        console.error("Error getting orders:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   const openEditModal = (itemId) => {
     setIsEditModalActive(true);
@@ -11,6 +41,10 @@ function Admin() {
     setIsEditModalActive(false);
   };
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className={styles.container}>
       <h1>Admin Dashboard</h1>
@@ -19,44 +53,47 @@ function Admin() {
       <div className={styles.metrics}>
         <div className={styles.metricBox}>
           <p className={styles.metricTitle}>Total Sales</p>
-          <p>$5,430.00</p>
+          <p>${orders.reduce((total, order) => total + Number(order.total_price), 0)}</p>
         </div>
         <div className={styles.metricBox}>
           <p className={styles.metricTitle}>Total Orders</p>
-          <p>150</p>
+          <p>{orders.length}</p>
         </div>
         <div className={styles.metricBox}>
-          <p className={styles.metricTitle}>Popular Products</p>
-          <p>Banana Bread with Chocolate Chips</p>
+          <p className={styles.metricTitle}>Pending Orders</p>
+          <p>{pendingOrders.length}</p>
         </div>
       </div>
 
       {/* Orders Section */}
       <div className={styles.section}>
-        <div className={styles.sectionHeader}>Recent Orders</div>
-        <div className={styles.order}>
-          <div className={styles.orderDetails}>
-            <p><strong>Order #1234</strong> - John Doe</p>
-            <p>2x Banana Bread with Chocolate Chips - $18.00</p>
-            <p>Delivery Date: November 10, 2024</p>
-          </div>
-          <div className={styles.orderActions}>
-            <button className={`${styles.button} ${styles.approve}`}>Confirm</button>
-            <button className={`${styles.button} ${styles.modify}`}>Modify</button>
-            <button className={`${styles.button} ${styles.reject}`}>Reject</button>
-          </div>
-        </div>
-        <div className={styles.order}>
-          <div className={styles.orderDetails}>
-            <p><strong>Order #1235</strong> - Mary Smith</p>
-            <p>1x Classic Banana Bread - $15.00</p>
-            <p>Delivery Date: November 12, 2024</p>
-          </div>
-          <div className={styles.orderActions}>
-            <button className={`${styles.button} ${styles.modify}`}>Modify</button>
-            <button className={`${styles.button} ${styles.delete}`}>Delete</button>
-          </div>
-        </div>
+        <div className={styles.sectionHeader}>Recent Pending Orders</div>
+        {pendingOrders.length === 0 ? (
+          <p>No pending orders to display.</p>
+        ) : (
+          pendingOrders.map((order) => (
+            <div key={order.id} className={styles.order}>
+              <div className={styles.orderDetails}>
+                <p>
+                  <strong>Order #{order.id}</strong>
+                </p>
+                {order.order_products.map((product) => (
+                  <p key={product.bread.name}>
+                    {product.quantity}x {product.bread.name}
+                  </p>
+                ))}
+                <p>
+                  <b>-Total: ${order.total_price}</b>
+                </p>
+              </div>
+              <div className={styles.orderActions}>
+                <button className={`${styles.button} ${styles.approve}`}>Confirm</button>
+                <button className={`${styles.button} ${styles.modify}`}>Modify</button>
+                <button className={`${styles.button} ${styles.reject}`}>Reject</button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Product Management Section */}
@@ -66,12 +103,19 @@ function Admin() {
         {/* Existing Product Example */}
         <div className={styles.breadItem} id="bread-1">
           <div className={styles.breadDetails}>
-            <p><strong>Classic Banana Bread</strong></p>
+            <p>
+              <strong>Classic Banana Bread</strong>
+            </p>
             <p>Description: Moist and delicious with a hint of vanilla.</p>
             <p>Price: $15.00</p>
           </div>
           <div className={styles.breadActions}>
-            <button className={`${styles.button} ${styles.modify}`} onClick={() => openEditModal('bread-1')}>Edit</button>
+            <button
+              className={`${styles.button} ${styles.modify}`}
+              onClick={() => openEditModal("bread-1")}
+            >
+              Edit
+            </button>
             <button className={`${styles.button} ${styles.delete}`}>Delete</button>
           </div>
         </div>
@@ -100,14 +144,22 @@ function Admin() {
             <input id="editPrice" type="number" placeholder="Price" step="0.01" required />
             <input type="file" accept="image/*" />
             <div className={styles.modalFooter}>
-              <button type="submit" className={`${styles.button} ${styles.save}`}>Save Changes</button>
-              <button type="button" className={`${styles.button} ${styles.cancel}`} onClick={closeEditModal}>Cancel</button>
+              <button type="submit" className={`${styles.button} ${styles.save}`}>
+                Save Changes
+              </button>
+              <button
+                type="button"
+                className={`${styles.button} ${styles.cancel}`}
+                onClick={closeEditModal}
+              >
+                Cancel
+              </button>
             </div>
           </form>
         </div>
       )}
     </div>
   );
-}
+};
 
-export default Admin
+export default Admin;

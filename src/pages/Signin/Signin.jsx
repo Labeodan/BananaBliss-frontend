@@ -15,13 +15,13 @@ function Signin({ setUser }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSignup = async () => {
+  const handleSignin = async () => {
     try {
       const newUser = await signIn(formData);
 
       // Check for valid response structure
       if (newUser && newUser.user && newUser.user.email) {
-        setUser(newUser.user.email); // Save user email to parent state
+        setUser(newUser.user); // Save user email to parent state
         navigate("/"); // Redirect to the home page
         setFormData({ email: "", password: "" }); // Reset form
       } else {
@@ -38,7 +38,7 @@ function Signin({ setUser }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleSignup();
+    await handleSignin();
   };
 
   return (

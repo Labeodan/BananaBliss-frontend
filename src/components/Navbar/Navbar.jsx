@@ -6,13 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
 // import { useState } from "react";
 
-function Navbar({user}) {
+function Navbar({ user, setUser }) {
   // const [closeNav, setCloseNav] = useState(false)
   const { totalItems } = useCart();
   const navigate = useNavigate();
   const logout = () => {
     removeToken();
     navigate("/");
+    setUser(null);
   };
 
   return (
@@ -45,42 +46,55 @@ function Navbar({user}) {
                   Menu
                 </Link>
               </li>
-              <li className="nav-item">
-              <Link to="/cart">Cart ({totalItems})</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signin">
-                  Signin
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
-                  Signup
-                </Link>
-              </li>
-              {user ?
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {user}
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li onClick={logout}>
-                    <button className="btn" onClick={logout}>
-                      Logout
-                    </button>
+              {user ? (
+                <>
+                  <li className="nav-item">
+                    <Link to="/cart" className="nav-link">
+                      Cart ({totalItems})
+                    </Link>
                   </li>
-                </ul>
-              </li>
-              :
-              <li></li>
-            }
+                  <li className="nav-item">
+                    <Link to="/orders" className="nav-link">
+                      Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {user}
+                    </a>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <li onClick={logout}>
+                        <button className="btn" onClick={logout}>
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/signin">
+                      Signin
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/signup">
+                      Signup
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

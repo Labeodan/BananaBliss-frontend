@@ -30,7 +30,7 @@ function Signup({ setUser }) {
       const newUser = await signUp(apiData);
 
       if (newUser && newUser.user && newUser.user.email) {
-        setUser(newUser.user.email);
+        setUser(newUser.user);
         setFormData({ email: "", password: "", confirmPassword: "" }); // Reset form
         navigate("/"); // Redirect after success
       } else {

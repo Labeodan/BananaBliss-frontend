@@ -8,8 +8,6 @@ function Cart() {
   const {
     items,
     isEmpty,
-    totalItems,
-    totalUniqueItems,
     cartTotal,
     emptyCart,
     updateItemQuantity,

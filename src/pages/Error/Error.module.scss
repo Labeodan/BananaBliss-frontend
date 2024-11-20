@@ -1,0 +1,43 @@
+
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/images/Error.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+        width: 500px;
+        height: 500Px;
+        text-align: center;
+        margin: 10px;
+
+        h1 {
+            font-size: 4rem !important;
+        }
+        h3 {
+            font-size: 3rem !important;
+        }
+        a {
+            text-decoration: none !important;
+            color: black!important;
+            font-size: 1.5rem;
+            cursor: pointer;
+            text-decoration: underline !important;
+        }
+
+        a:hover {
+            color: azure !important;
+        }
+    }
+}
+
