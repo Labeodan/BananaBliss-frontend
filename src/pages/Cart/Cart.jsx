@@ -18,12 +18,21 @@ function Cart() {
 
   const navigate = useNavigate();
 
+  const productsInOrder = [
+  ] 
+
+  items.forEach(item => {
+    productsInOrder.push({
+      bread: item.id,
+      quantity:item.quantity })
+  })
+  console.log(productsInOrder)
+
   const handleCheckout = () => {
     if (isEmpty) return alert("Your cart is empty!");
-    // Save the order to localStorage or an API
-    // const orderId = Date.now(); // Unique ID
+    // Save the order API
     const orderData = {
-      order_products: items,
+      order_products: productsInOrder,
       total_price: cartTotal,
       status: "pending",
       user: user.user_id
@@ -34,6 +43,10 @@ function Cart() {
       try {
         const createSingleOrder = await createOrder(orderData)
         console.log(createSingleOrder)
+        // Clear the cart
+        emptyCart();
+        // Navigate to Order Status page
+        navigate(`/orders`);
       } catch (error) {
         console.log("error creating order")
         console.log(error)
@@ -44,11 +57,6 @@ function Cart() {
     order()
   
 
-    // Clear the cart
-    emptyCart();
-
-    // Navigate to Order Status page
-    navigate(`/orders`);
   }
 
 

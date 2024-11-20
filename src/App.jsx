@@ -10,6 +10,7 @@ import { getUser } from "./utils/token"
 import { getProducts } from "./services/products"
 import Cart from "./pages/cart/cart"
 import Orders from "./pages/Orders/Orders"
+import Admin from "./pages/Admin/Admin"
 
 
 function App() {
@@ -50,6 +51,7 @@ useEffect(() => {
         <Route path="/signup" element={<Signup setUser={setUser} />}></Route>
         <Route path="/cart" element={<Cart />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/admin" element={<Admin />} />
         
 
 

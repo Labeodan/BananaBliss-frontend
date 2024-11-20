@@ -41,28 +41,40 @@ const Orders = () => {
 
   return (
     <div className={styles.orderStatusContainer}>
-      <h1>Your Order Status</h1>
-      {orders.length > 0 ? (
-        orders.map((order) => (
-          <div key={order.id} className={styles.orderCard}>
-            <h2>Order ID: {order.id}</h2>
-            {/* <p>
-              <strong>Items Purchased:</strong> {order.order_products}
-            </p> */}
-            <p>
-              <strong>Total Cost:</strong> ${order.total_price}
-            </p>
-            <p className={`${styles[getStatusClass(order.status)]}`}
-            >
-              Status: {order.status}
-            </p>
-            <p className={styles.orderMessage}>{order.message}</p>
-          </div>
-        ))
-      ) : (
-        <p>No orders found.</p>
-      )}
-    </div>
+  <h1>Your Order Status</h1>
+  {orders.length > 0 ? (
+    orders.map((order) => (
+      <div key={order.id} className={styles.orderCard}>
+        <h2>Order ID: {order.id}</h2>
+        <p>
+          <strong>Total Cost:</strong> ${order.total_price}
+        </p>
+        <p className={`${styles[getStatusClass(order.status)]}`}>
+          Status: {order.status}
+        </p>
+        <p className={styles.orderMessage}>
+          {order.message || "No message for this order."}
+        </p>
+        <h3>Items Purchased:</h3>
+        <ul>
+          {order.order_products.map((product, index) => (
+            <li key={index} className={styles.orderProduct}>
+              <div className={styles.productDetails}>
+                <h4>{product.bread.name}</h4>
+                <p>
+                  <strong>Quantity:</strong> {product.quantity}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  ) : (
+    <p>No orders found.</p>
+  )}
+</div>
+
   );
 };
 
