@@ -8,7 +8,7 @@ import Signup from "./pages/Signup/Signup";
 import { useState, useEffect } from "react";
 import { getUser } from "./utils/token";
 import { getProducts } from "./services/products";
-import Cart from "./pages/cart/cart";
+import Cart from "./pages/Cart/Cart";
 import Orders from "./pages/Orders/Orders";
 import Admin from "./pages/Admin/Admin";
 import Error from "./pages/Error/Error";
