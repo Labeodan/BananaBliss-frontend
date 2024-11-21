@@ -1,5 +1,5 @@
 .banner {
-    background-image: url('/images/banner.jpg');
+    background-image: url('../../assets/images/banner.webp');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -9,12 +9,16 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    // margin-top: 10px;
+    
   
     .overlay {
       background: rgba(0, 0, 0, 0.5);
-      padding: 3rem;
+      padding: 2rem;
       border-radius: 8px;
       max-width: 90%;
+      height: auto;
+      
     }
   
     h1 {
@@ -60,7 +64,7 @@
     p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
-      color: #a97f5a;
+      // color: #a97f5a;
     }
   }
   

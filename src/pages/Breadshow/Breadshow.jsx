@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import { getProduct } from "../../services/products";
 import { useEffect, useState } from "react";
 import Bread from "../../components/Bread/Bread";
+import Loading from "../Loading/Loading";
+import { useCart } from "react-use-cart";
 
 function Breadshow({products}) {
+  const [loading, setLoading] = useState(true)
+  const {addItem} = useCart()
   const {breadId} = useParams()
   // console.log(params.breadId)
   const [product, setProduct] = useState({})
@@ -15,10 +19,12 @@ function Breadshow({products}) {
 
   useEffect(() => {
     const getSingleProduct = async () => {
+      setLoading(true)
       try {
         const singleProduct = await getProduct(breadId); // Assuming getProduct is a function that fetches the product.
         if (singleProduct) {
           setProduct(singleProduct.data);
+          setLoading(false)
         } else {
           console.error("Could not get product");
         }
@@ -46,6 +52,13 @@ function Breadshow({products}) {
     getSingleProduct();
     getRandomProducts();
   }, [breadId, products]);
+
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
+
   return (
     
       <div>
@@ -63,9 +76,9 @@ function Breadshow({products}) {
              {product.description}
             </p>
             <div className={styles.price}>${product.price}</div>
-            <a href="#add-to-cart" className={styles.addToCart}>
+            <button onClick={()=> addItem(product)} className={styles.addToCart}>
               Add to Cart
-            </a>
+            </button>
           </div>
         </section>
   

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getOrders } from "../../services/order";
 import styles from "./Orders.module.scss"
+import Loading from "../Loading/Loading";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -25,18 +26,20 @@ const Orders = () => {
 
   const getStatusClass = (status) => {
     switch (status) {
-      case "accepted":
+      case "completed":
         return "statusAccepted";
       case "pending":
         return "statusPending";
-      case "rejected":
+      case "canceled":
         return "statusRejected";
       default:
         return "";
     }
   };
 
-  if (loading) return <p className={styles.loadingMessage}>Loading orders...</p>;
+  if (loading) return (
+    <Loading />
+  );
   if (error) return <p className={styles.errorMessage}>{error}</p>;
 
   return (

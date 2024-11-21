@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { createOrder } from "../../services/order";
 import { getUser } from "../../utils/token";
 function Cart() {
+
   const user = getUser()
   const {
     items,
@@ -24,7 +25,7 @@ function Cart() {
       bread: item.id,
       quantity:item.quantity })
   })
-  console.log(productsInOrder)
+  // console.log(productsInOrder)
 
   const handleCheckout = () => {
     if (isEmpty) return alert("Your cart is empty!");
@@ -59,6 +60,7 @@ function Cart() {
 
 
 
+ 
 
   if (isEmpty) return <p className={styles.emptyMessage}>Your cart is empty</p>;
 

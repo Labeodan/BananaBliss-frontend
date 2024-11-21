@@ -19,19 +19,16 @@
     .productInfo {
       h1 {
         font-size: 2.5rem;
-        font-family: 'Georgia', serif;
         margin-bottom: 1rem;
       }
   
       p {
         font-size: 1.1rem;
-        color: #7c5d48;
         margin-bottom: 1.5rem;
       }
   
       .price {
         font-size: 1.5rem;
-        color: #d8a65e;
         margin-bottom: 1.5rem;
       }
   
@@ -55,7 +52,8 @@
   .relatedProducts {
     margin-top: 3rem;
     text-align: center;
-    margin: auto;
+   
+    padding: 20px;
   
     h2 {
       font-size: 2rem;

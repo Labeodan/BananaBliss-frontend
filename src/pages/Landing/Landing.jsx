@@ -1,12 +1,19 @@
 import styles from './Landing.module.scss';
 import Bread from '../../components/Bread/Bread';
 import { Link } from 'react-router-dom';
+import Loading from "../Loading/Loading";
 
-function Landing({products}) {
+
+function Landing({products, loading}) {
 
   const filteredProducts = products?.filter((product, i) => i < 4)
 
 
+  if (loading) {
+    return(
+      <Loading />
+    )
+  }
 
 
   return (
@@ -15,7 +22,7 @@ function Landing({products}) {
       <div className={styles.overlay}>
         <h1>Welcome to Banana Bliss</h1>
         <p className={styles.tagline}>The sweetest spot for banana treats!</p>
-        <p>Indulge in freshly baked banana bread, cookies, muffins, and more!</p>
+        <p>Indulge in freshly baked banana bread!</p>
         <Link to="/menu" className={styles.shopNow}>
           Shop Now
         </Link>

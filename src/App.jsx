@@ -12,20 +12,26 @@ import Cart from "./pages/cart/cart";
 import Orders from "./pages/Orders/Orders";
 import Admin from "./pages/Admin/Admin";
 import Error from "./pages/Error/Error";
+import ProductManager from "./pages/Admin/ProductManager";
+import Loading from "./pages/Loading/Loading";
+
 
 function App() {
   const [user, setUser] = useState(getUser());
+  const [loading, setLoading] = useState(true)
   const username = user?.username || user?.email;
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const getAllProducts = async () => {
       try {
+        setLoading(true)
         const allProducts = await getProducts();
         // console.log(allProducts.data)
 
         // console.log(filtered)
         if (allProducts) {
           setProducts(allProducts.data);
+          setLoading(false)
         }
       } catch (error) {
         console.log(error);
@@ -39,20 +45,22 @@ function App() {
     <>
       <Navbar user={username} setUser={setUser} />
       <Routes>
+        <Route path="/loading" element={<Loading />}/>
         <Route
           path="/"
           element={
-            user?.role === "admin" ? <Admin /> : <Landing products={products} />
+            user?.role === "admin" ? <Admin /> : <Landing products={products} loading={loading} />
           }
         ></Route>
 
-        <Route path="/menu" element={<Menu products={products} />}></Route>
+        <Route path="/menu" element={<Menu products={products} user={user} loading={loading}/>}></Route>
         {user ? (
           <>
             <Route
               path="/menu/:breadId"
               element={<Breadshow products={products} />}
             ></Route>
+            <Route path="/productmanager" element={<ProductManager />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<Orders />} />
           </>

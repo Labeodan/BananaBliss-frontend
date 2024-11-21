@@ -7,6 +7,8 @@
     background-color: #f9f3e9;
     font-family: Arial, sans-serif;
     color: #5a4637;
+    margin: 10px;
+    border-radius: 20px;
   }
   
   h1 {
@@ -25,6 +27,7 @@
   }
   
   .itemInfo {
+
     .itemName {
       font-size: 1.2rem;
       font-weight: bold;
@@ -33,6 +36,7 @@
   
     .itemPrice {
       font-size: 1.1rem;
+  
       color: #d8a65e;
     }
   
@@ -120,10 +124,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
   
-      .itemPrice,
-      .quantityControls,
-      .itemTotalPrice {
-        text-align: right;
-      }
+      // .itemPrice,
+      // .quantityControls,
+      // .itemTotalPrice {
+      //   text-align: right;
+      // }
     }
   }

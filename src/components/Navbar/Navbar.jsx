@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { removeToken } from "../../utils/token";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
+import { getUser } from "../../utils/token";
 // import { useState } from "react";
 
 function Navbar({ user, setUser }) {
   // const [closeNav, setCloseNav] = useState(false)
   const { totalItems } = useCart();
+  const userRole = getUser()
   const navigate = useNavigate();
   const logout = () => {
     removeToken();
@@ -48,6 +50,14 @@ function Navbar({ user, setUser }) {
               </li>
               {user ? (
                 <>
+                {userRole.role === "admin"? (
+                  <>
+                  <li>
+                    <Link className="nav-link" to={"/productmanager"}>Product Manager</Link>
+                  </li>
+                  </>
+                ):(
+                  <>
                   <li className="nav-item">
                     <Link to="/cart" className="nav-link">
                       Cart ({totalItems})
@@ -58,6 +68,11 @@ function Navbar({ user, setUser }) {
                       Orders
                     </Link>
                   </li>
+                  
+                  </>
+                )}
+
+                <>
                   <li className="nav-item dropdown">
                     <a
                       className="nav-link dropdown-toggle"
@@ -66,13 +81,13 @@ function Navbar({ user, setUser }) {
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
-                    >
+                      >
                       {user}
                     </a>
                     <ul
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
-                    >
+                      >
                       <li onClick={logout}>
                         <button className="btn" onClick={logout}>
                           Logout
@@ -81,6 +96,7 @@ function Navbar({ user, setUser }) {
                     </ul>
                   </li>
                 </>
+                      </>
               ) : (
                 <>
                   <li className="nav-item">

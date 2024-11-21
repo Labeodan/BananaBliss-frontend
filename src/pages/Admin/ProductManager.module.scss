@@ -1,0 +1,79 @@
+.container {
+    padding: 2rem;
+  }
+  
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #FFF7E0;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .formContainer input,
+  .formContainer textarea {
+    padding: 8px;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .button {
+    padding: 8px 12px;
+    background-color: #FFD18D;
+    color: #5B4033;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .add {
+    background-color: green;
+    color: white;
+  }
+  
+  .modify {
+    background-color: blue;
+    color: white;
+  }
+  
+  .delete {
+    background-color: red;
+    color: white;
+  }
+  
+  .productList {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .product {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 1rem;
+    width: calc(33.333% - 2rem);
+  }
+  
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modalFooter {
+    margin-top: 1rem;
+  }
+  

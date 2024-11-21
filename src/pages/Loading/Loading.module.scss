@@ -1,0 +1,31 @@
+.loadingScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f0f0f0; /* Adjust background color as needed */
+    color: #333; /* Adjust text color */
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.7);
+    border-top-color: #f4d19a; /* Adjust spinner color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+p {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: 500;
+}
