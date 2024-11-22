@@ -18,6 +18,13 @@ function Navbar({ user, setUser }) {
     setUser(null);
   };
 
+  const handleNavLinkClick = () => {
+    const navbar = document.querySelector('.navbar-collapse');
+    if (navbar && navbar.classList.contains('show')) {
+      new window.bootstrap.Collapse(navbar).hide(); // Close the navbar
+    }
+  };
+
   return (
     <div className={styles.navbar}>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,12 +45,12 @@ function Navbar({ user, setUser }) {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              <li className="nav-item" onClick={handleNavLinkClick}>
                 <Link className="nav-link active" aria-current="page" to="/">
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" onClick={handleNavLinkClick}>
                 <Link className="nav-link" to="/menu">
                   Menu
                 </Link>
@@ -52,18 +59,18 @@ function Navbar({ user, setUser }) {
                 <>
                 {userRole.role === "admin"? (
                   <>
-                  <li>
+                  <li className="nav-item" onClick={handleNavLinkClick}>
                     <Link className="nav-link" to={"/productmanager"}>Product Manager</Link>
                   </li>
                   </>
                 ):(
                   <>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={handleNavLinkClick}>
                     <Link to="/cart" className="nav-link">
                       Cart ({totalItems})
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={handleNavLinkClick}>
                     <Link to="/orders" className="nav-link">
                       Orders
                     </Link>
@@ -89,7 +96,9 @@ function Navbar({ user, setUser }) {
                       aria-labelledby="navbarDropdown"
                       >
                       <li onClick={logout}>
-                        <button className="btn" onClick={logout}>
+                        <button className="btn" onClick={()=> {
+                          logout()
+                          }}>
                           Logout
                         </button>
                       </li>
@@ -99,12 +108,12 @@ function Navbar({ user, setUser }) {
                       </>
               ) : (
                 <>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={handleNavLinkClick}>
                     <Link className="nav-link" to="/signin">
                       Signin
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={handleNavLinkClick}>
                     <Link className="nav-link" to="/signup">
                       Signup
                     </Link>
