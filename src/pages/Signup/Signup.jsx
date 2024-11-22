@@ -12,7 +12,7 @@ function Signup({ setUser }) {
   const [errors, setErrors] = useState({
     email: "",
     password: "",
-    noneFieldError: "",
+    non_field_error: "",
   });
 
   const handleChange = (e) => {
@@ -28,21 +28,25 @@ function Signup({ setUser }) {
 
     try {
       const newUser = await signUp(apiData);
+      console.log(newUser)
+
+      const {email, password, non_field_errors} = newUser
+      console.log(non_field_errors)
+
+      if (email || password || non_field_errors) {
+        setErrors((prevErrors) => ({
+          ...prevErrors, email: email, password: password, non_field_error: non_field_errors && non_field_errors[0]
+        }))
+      }
 
       if (newUser && newUser.user && newUser.user.email) {
         setUser(newUser.user);
         setFormData({ email: "", password: "", confirmPassword: "" }); // Reset form
         navigate("/"); // Redirect after success
-      } else {
-        const errorMessage = newUser.email[0] || newUser.password[0] || "An error occurred during signup.";
-        throw new Error(errorMessage);
       }
+
     } catch (error) {
-      console.error("Error during signup:", error);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        noneFieldError: error.message || "An error occurred. Please try again.",
-      }));
+      console.error("Error during signup:", error.message);
     }
   };
 
@@ -66,11 +70,12 @@ function Signup({ setUser }) {
     }
 
     // Clear field-specific errors before making the API call
-    setErrors({ email: "", password: "", noneFieldError: "" });
+    setErrors({ email: "", password: "", non_field_error: "" });
 
     await handleSignup();
   };
 
+  console.log(errors)
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -104,8 +109,8 @@ function Signup({ setUser }) {
           required
         />
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        {errors.noneFieldError && (
-          <p style={{ color: "red" }}>{errors.noneFieldError}</p>
+        {errors.non_field_error && (
+          <p style={{ color: "red" }}>{errors.non_field_error}</p>
         )}
         <button type="submit">Sign Up</button>
         <p>

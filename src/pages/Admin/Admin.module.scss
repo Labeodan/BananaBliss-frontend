@@ -53,6 +53,10 @@
     align-items: center;
     padding: 15px;
     border-bottom: 1px solid #EEE;
+
+    @media screen  and (max-width: 450px) {
+      display: block;
+    }
   }
   
   .orderDetails, .breadDetails {
@@ -62,6 +66,11 @@
   .orderActions, .breadActions {
     display: flex;
     gap: 10px;
+    
+    @media screen and (max-width: 623px) {
+      flex-direction: column;
+      
+    }
   }
   
   .button {
@@ -88,21 +97,14 @@
   }
   
   .formContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin: auto;
     background-color: #FFF7E0;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 10px;
+
   }
   
   .formContainer input,
   .formContainer textarea {
-    padding: 8px;
     border: 1px solid #DDD;
-    border-radius: 4px;
-    width: 100%;
   }
   
   /* Modal styles */
@@ -119,6 +121,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     z-index: 1000;
+
+    button {
+      font-size: 15px;
+    }
+
+  
   }
   
   .modal.active {
@@ -129,6 +137,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+  
   }
   
   .modalFooter button {

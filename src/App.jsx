@@ -14,6 +14,8 @@ import Admin from "./pages/Admin/Admin";
 import Error from "./pages/Error/Error";
 import ProductManager from "./pages/Admin/ProductManager";
 import Loading from "./pages/Loading/Loading";
+import { useNavigate } from "react-router-dom";
+import { removeToken } from "./utils/token";
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
   const [loading, setLoading] = useState(true)
   const username = user?.username || user?.email;
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState({})
+  const navigate = useNavigate()
   useEffect(() => {
     const getAllProducts = async () => {
       try {
@@ -35,11 +39,17 @@ function App() {
         }
       } catch (error) {
         console.log(error);
+        setError(error.response.data)
       }
     };
-
     getAllProducts();
   }, []);
+
+  if (error.code === "token_not_valid") {
+    removeToken()
+    setUser(null)
+    navigate("/")
+  }
 
   return (
     <>

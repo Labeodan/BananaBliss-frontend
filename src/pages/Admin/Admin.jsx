@@ -198,7 +198,7 @@ const Admin = () => {
                   type="submit"
                   className={`${styles.button} ${styles.save}`}
                 >
-                  Save Changes
+                  Save
                 </button>
                 <button
                   type="button"
