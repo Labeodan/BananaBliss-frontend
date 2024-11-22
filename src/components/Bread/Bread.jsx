@@ -2,10 +2,12 @@ import styles from "./Bread.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { getUser } from "../../utils/token";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 
 function Bread({ product, openEditModal, handleDeleteProduct}) {
-  const params = useParams()
+  const location = useLocation()
+  const presentPath = location.pathname
   const navigate = useNavigate();
   const user = getUser();
   const { addItem } = useCart();
@@ -37,7 +39,7 @@ function Bread({ product, openEditModal, handleDeleteProduct}) {
         {user && user.role === "admin"?
         (
             <>
-            {params.breadId? (
+            {presentPath !== "/productmanager"? (
               <button onClick={()=> handleNavigate(product.id)}>View</button>
               
             ): (
