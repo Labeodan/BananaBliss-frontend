@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getOrders, deleteOrder } from "../../services/order";
 import styles from "./Orders.module.scss"
 import Loading from "../Loading/Loading";
+import toast from "react-hot-toast";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -14,6 +15,7 @@ const Orders = () => {
         const response = await getOrders();
         setOrders(response.data); // Assuming API returns an array of orders
       } catch (err) {
+        toast.error("Error fetching Orders")
         console.error("Error fetching orders:", err);
         setError("Failed to fetch orders. Please try again later.");
       } finally {
@@ -28,10 +30,10 @@ const Orders = () => {
   const handleDeleteOrder = async (id) => {
     try {
       const deletedOrder = await deleteOrder(id)
-      console.log(deletedOrder)
 
       const newOrdersArray = orders.filter((order)=> order.id !== id )
       setOrders(newOrdersArray)
+      toast.success('Order Deleted!', {icon: '🍌'})
 
     } catch (error) {
       console.log("Error deleting order", error)

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../../services/auth";
+import toast from "react-hot-toast";
+
 
 function Signin({ setUser }) {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ function Signin({ setUser }) {
       if (newUser && newUser.user && newUser.user.email) {
         setUser(newUser.user); // Save user email to parent state
         navigate("/"); // Redirect to the home page
+        toast.success("Sign In Successful", {icon: '🍌'})
         setFormData({ email: "", password: "" }); // Reset form
       } else {
         const errorMessage = newUser?.detail || "Invalid credentials.";
@@ -31,6 +34,7 @@ function Signin({ setUser }) {
 
       console.log("User signed in:", newUser);
     } catch (error) {
+      toast.error(error.message)
       console.error("Error during signin:", error);
       setErrors(error.message || "An error occurred. Please try again.");
     }

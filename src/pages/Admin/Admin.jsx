@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./Admin.module.scss";
 import { getOrders, updateOrder } from "../../services/order";
 import Loading from "../Loading/Loading";
+import toast from "react-hot-toast";
 
 const Admin = () => {
   const [orders, setOrders] = useState([]);
@@ -45,6 +46,7 @@ const Admin = () => {
       const updatedOrders = orders.map((order) =>
         order.id === orderId ? { ...order, status: newStatus } : order
       );
+      toast.success(`Order ${newStatus}`, {icon: '🍌'})
       setOrders(updatedOrders);
       categorizeOrders(updatedOrders);
     } catch (error) {
@@ -78,6 +80,7 @@ const Admin = () => {
           : order
       );
       setOrders(updatedOrders);
+      toast.success("Order Message Updated", {icon: '🍌'})
       closeEditModal();
     } catch (error) {
       console.log("Error updating order message", error);

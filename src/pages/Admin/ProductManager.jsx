@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import styles from "./ProductManager.module.scss"; // Import your SCSS file
+import styles from "./ProductManager.module.scss";
+import toast from "react-hot-toast";
 import {
   getProducts,
   createProduct,
@@ -70,6 +71,7 @@ function ProductManager() {
       const response = await createProduct(formData);
       setProducts([...products, response.data]);
       setNewProduct({ name: "", description: "", price: "", image: null });
+      toast.success("Product Created!", {icon: '🍌'})
     } catch (error) {
       console.error(
         "Error creating product:",
@@ -104,6 +106,7 @@ function ProductManager() {
         )
       );
       closeEditModal();
+      toast.success("Edited Successfully", {icon:'🍌'})
     } catch (error) {
       console.error(
         "Error editing product:",
@@ -116,6 +119,7 @@ function ProductManager() {
     try {
       await deleteProduct(productId);
       setProducts(products.filter((product) => product.id !== productId));
+      toast.success("Deleted Successfully", {icon:'🍌'})
     } catch (error) {
       console.error("Error deleting product:", error);
     }

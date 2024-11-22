@@ -3,6 +3,7 @@ import styles from "./Cart.module.scss";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../../services/order";
 import { getUser } from "../../utils/token";
+import toast from "react-hot-toast";
 function Cart() {
 
   const user = getUser()
@@ -28,7 +29,7 @@ function Cart() {
   // console.log(productsInOrder)
 
   const handleCheckout = () => {
-    if (isEmpty) return alert("Your cart is empty!");
+    if (isEmpty) return toast.error("Your cart is empty!");
     // Save the order API
     const orderData = {
       order_products: productsInOrder,
@@ -44,9 +45,11 @@ function Cart() {
         console.log(createSingleOrder)
         // Clear the cart
         emptyCart();
+        toast.success("Order Created", {icon: '🍌'})
         // Navigate to Order Status page
         navigate(`/orders`);
       } catch (error) {
+        toast.error("Error Creating Order")
         console.log("error creating order")
         console.log(error)
         
@@ -56,6 +59,11 @@ function Cart() {
     order()
   
 
+  }
+
+  const removeFromCart = (id) => {
+    removeItem(id)
+    toast.success("Removed From Cart!", {icon: '🍌'})
   }
 
 
@@ -74,7 +82,7 @@ function Cart() {
             <div className={styles.itemPrice}>${item.price}</div>
             <span
               className={styles.removeItem}
-              onClick={() => removeItem(item.id)}
+              onClick={() => removeFromCart(item.id)}
             >
               Remove
             </span>

@@ -5,14 +5,22 @@ import { useEffect, useState } from "react";
 import Bread from "../../components/Bread/Bread";
 import Loading from "../Loading/Loading";
 import { useCart } from "react-use-cart";
+import toast from "react-hot-toast";
+import { getUser } from "../../utils/token";
 
 function Breadshow({products}) {
+  const user = getUser()
   const [loading, setLoading] = useState(true)
   const {addItem} = useCart()
   const {breadId} = useParams()
   // console.log(params.breadId)
   const [product, setProduct] = useState({})
   const [filteredProducts, setFilteredProducts] = useState([])
+
+  const addToCart = (product) => {
+    addItem(product)
+    toast.success("Added To Cart!", {icon: '🍌'})
+  }
 
   
   
@@ -76,9 +84,16 @@ function Breadshow({products}) {
              {product.description}
             </p>
             <div className={styles.price}>${product.price}</div>
-            <button onClick={()=> addItem(product)} className={styles.addToCart}>
+            {user?.role === "user"? (
+              <button onClick={()=> addToCart(product)} className={styles.addToCart}>
               Add to Cart
             </button>
+
+            ):(
+              <>
+              
+              </>
+            )}
           </div>
         </section>
   

@@ -16,6 +16,8 @@ import ProductManager from "./pages/Admin/ProductManager";
 import Loading from "./pages/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "./utils/token";
+import { Toaster } from "react-hot-toast";
+
 
 
 function App() {
@@ -54,12 +56,13 @@ function App() {
   return (
     <>
       <Navbar user={username} setUser={setUser} />
+      <Toaster position="top-right"/>
       <Routes>
         <Route path="/loading" element={<Loading />}/>
         <Route
           path="/"
           element={
-            user?.role === "admin" ? <Admin /> : <Landing products={products} loading={loading} />
+            user?.role === "admin" ? <Admin /> : <Landing products={products} loading={loading} user={user}/>
           }
         ></Route>
 

@@ -8,7 +8,6 @@ function Landing({products, loading}) {
 
   const filteredProducts = products?.filter((product, i) => i < 4)
 
-
   if (loading) {
     return(
       <Loading />

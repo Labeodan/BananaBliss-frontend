@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { getUser } from "../../utils/token";
 import { useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 function Bread({ product, openEditModal, handleDeleteProduct}) {
@@ -11,6 +12,16 @@ function Bread({ product, openEditModal, handleDeleteProduct}) {
   const navigate = useNavigate();
   const user = getUser();
   const { addItem } = useCart();
+
+  const addToCart = (product) => {
+    if (user === null) {
+      navigate("/signin");
+    } else {
+
+      addItem(product)
+      toast.success("Added To Cart!", {icon: '🍌'})
+    }
+  }
 
   const handleNavigate = (id) => {
     if (user === null) {
@@ -53,7 +64,7 @@ function Bread({ product, openEditModal, handleDeleteProduct}) {
         ):(
             <>
             <button onClick={()=> handleNavigate(product.id)}>View</button>
-            <button onClick={() => addItem(product)}>Add to cart</button>
+            <button onClick={() => addToCart(product)}>Add to cart</button>
             </>
         )}
       </div>

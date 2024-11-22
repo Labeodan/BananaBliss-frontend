@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { getUser } from "../../utils/token";
 // import { useState } from "react";
+import toast from "react-hot-toast";
 
 function Navbar({ user, setUser }) {
   // const [closeNav, setCloseNav] = useState(false)
@@ -16,6 +17,7 @@ function Navbar({ user, setUser }) {
     removeToken();
     navigate("/");
     setUser(null);
+    toast.success("Logout Successful", {icon: '🍌'})
   };
 
   const handleNavLinkClick = () => {
@@ -95,7 +97,7 @@ function Navbar({ user, setUser }) {
                       className="dropdown-menu"
                       aria-labelledby="navbarDropdown"
                       >
-                      <li onClick={logout}>
+                      <li>
                         <button className="btn" onClick={()=> {
                           logout()
                           }}>
