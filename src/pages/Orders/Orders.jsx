@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getOrders } from "../../services/order";
+import { getOrders, deleteOrder } from "../../services/order";
 import styles from "./Orders.module.scss"
 import Loading from "../Loading/Loading";
 
@@ -23,6 +23,20 @@ const Orders = () => {
 
     fetchOrders();
   }, []);
+
+
+  const handleDeleteOrder = async (id) => {
+    try {
+      const deletedOrder = await deleteOrder(id)
+      console.log(deletedOrder)
+
+      const newOrdersArray = orders.filter((order)=> order.id !== id )
+      setOrders(newOrdersArray)
+
+    } catch (error) {
+      console.log("Error deleting order", error)
+    }
+  }
 
   const getStatusClass = (status) => {
     switch (status) {
@@ -71,6 +85,14 @@ const Orders = () => {
             </li>
           ))}
         </ul>
+        {order.status !== "completed"? (
+          <button onClick={()=> handleDeleteOrder(order.id)}>Delete Order</button>
+
+        ):(
+          <>
+          
+          </>
+        )}
       </div>
     ))
   ) : (
