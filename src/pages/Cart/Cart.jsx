@@ -11,7 +11,7 @@ function Cart() {
     items,
     isEmpty,
     cartTotal,
-    emptyCart,
+    // emptyCart,
     updateItemQuantity,
     removeItem,
   } = useCart();
@@ -44,10 +44,10 @@ function Cart() {
         const createSingleOrder = await createOrder(orderData)
         console.log(createSingleOrder)
         // Clear the cart
-        emptyCart();
-        toast.success("Order Created", {icon: '🍌'})
+        // emptyCart();
+        // toast.success("Order Created", {icon: '🍌'})
         // Navigate to Order Status page
-        navigate(`/orders`);
+        navigate(`/checkout`);
       } catch (error) {
         toast.error("Error Creating Order")
         console.log("error creating order")

@@ -13,10 +13,11 @@ import Orders from "./pages/Orders/Orders";
 import Admin from "./pages/Admin/Admin";
 import Error from "./pages/Error/Error";
 import ProductManager from "./pages/Admin/ProductManager";
-import Loading from "./pages/Loading/Loading";
+// import Loading from "./pages/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "./utils/token";
 import { Toaster } from "react-hot-toast";
+import Checkout from "./pages/Checkout/Checkout";
 
 
 
@@ -58,7 +59,7 @@ function App() {
       <Navbar user={username} setUser={setUser} />
       <Toaster position="top-right"/>
       <Routes>
-        <Route path="/loading" element={<Loading />}/>
+        {/* <Route path="/loading" element={<Loading />}/> */}
         <Route
           path="/"
           element={
@@ -76,6 +77,7 @@ function App() {
             <Route path="/productmanager" element={<ProductManager />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/checkout" element={<Checkout />}/>
           </>
         ) : (
           <>
