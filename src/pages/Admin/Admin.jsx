@@ -190,7 +190,7 @@ const Admin = () => {
               <h3>Edit Message</h3>
               <button onClick={closeEditModal}>X</button>
             </div>
-            <form className={styles.formContainer} onSubmit={saveMessage}>
+            <form className={styles.formContainer} id="form" onSubmit={saveMessage}>
               <textarea
                 name="message"
                 defaultValue={selectedOrder.message || ""}

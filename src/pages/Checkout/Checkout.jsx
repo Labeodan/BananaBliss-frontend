@@ -5,10 +5,10 @@ function Checkout() {
     const [ formData, setFormData ] = useState({
         firstname: "",
         lastname: "",
-        mobile: null,
+        mobile: "",
         address: {
             street: "",
-            houseNumber: null,
+            houseNumber: "",
             city: "",
             province: "",
             postalCode: "",
@@ -28,7 +28,7 @@ function Checkout() {
                 ...formData.address, 
                 [e.target.name]: e.target.value
         }}
-
+ 
         setFormData(updatedAddress)
     }
 
@@ -47,11 +47,10 @@ function Checkout() {
 
 
   return (
-      <div id={styles.checkout_page}>
-          checkout page
-          <div className="form-container">
-          <form action="" method="post" onSubmit={handelFormSubmit}>
-              <label htmlFor="form-heading">Billing Details</label>
+      <div id={styles.checkout_page} className="container-fluid">
+          <div className="form-container container align-items-start">
+          <form action="" method="post" onSubmit={handelFormSubmit} id={styles.checkout_form} className="container-lg d-flex flex-column m-2">
+              <label htmlFor="form-heading" className="mt-2 mb-2">Billing Details</label>
 
               <input 
               type="text" 

@@ -199,7 +199,7 @@ function ProductManager() {
             <h3>Edit Product</h3>
             <button onClick={closeEditModal}>X</button>
           </div>
-          <form className={styles.formContainer} onSubmit={handleEditProduct}>
+          <form className={styles.formContainer} id="form" onSubmit={handleEditProduct}>
             <input
               type="text"
               placeholder="Product Name"

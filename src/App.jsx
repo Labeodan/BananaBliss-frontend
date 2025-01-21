@@ -51,7 +51,7 @@ function App() {
   if (error.code === "token_not_valid") {
     removeToken()
     setUser(null)
-    navigate("/")
+    navigate("/login")
   }
 
   return (

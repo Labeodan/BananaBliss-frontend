@@ -47,7 +47,7 @@ function Signin({ setUser }) {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="form">
         <h1>Sign In To Banana Bliss</h1>
         <input
           type="email"

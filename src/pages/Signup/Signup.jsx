@@ -78,7 +78,7 @@ function Signup({ setUser }) {
   console.log(errors)
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="form">
         <h1>Create an Account</h1>
         <input
           type="email"

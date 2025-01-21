@@ -16,7 +16,7 @@ function Landing({products, loading}) {
 
 
   return (
-    <div>
+    <div className={styles.landing}>
       <header className={styles.banner}>
       <div className={styles.overlay}>
         <h1>Welcome to Banana Bliss</h1>
