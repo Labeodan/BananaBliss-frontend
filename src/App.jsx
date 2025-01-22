@@ -31,28 +31,33 @@ function App() {
   useEffect(() => {
     const getAllProducts = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const allProducts = await getProducts();
-        // console.log(allProducts.data)
-
-        // console.log(filtered)
         if (allProducts) {
           setProducts(allProducts.data);
-          setLoading(false)
         }
-      } catch (error) {
-        console.log(error);
-        setError(error.response.data)
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        // Check if the error is due to an invalid token
+        if (err.response?.data?.code === "token_not_valid") {
+          handleInvalidToken();
+        } else {
+          setError(err.response?.data || "An error occurred.");
+        }
+      } finally {
+        setLoading(false);
       }
     };
+
     getAllProducts();
+    
   }, []);
 
-  if (error.code === "token_not_valid") {
-    removeToken()
-    setUser(null)
-    navigate("/login")
-  }
+  const handleInvalidToken = () => {
+    removeToken(); // Clear the token
+    setUser(null); // Optional: If you're tracking user state
+    navigate("/login"); // Redirect to login
+  };
 
   return (
     <>
