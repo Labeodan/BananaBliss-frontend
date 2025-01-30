@@ -168,5 +168,3 @@ function Checkout() {
 export default Checkout
 
 
-//! this is the form for getting user details
-
