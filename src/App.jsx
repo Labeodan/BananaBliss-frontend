@@ -56,7 +56,7 @@ function App() {
   const handleInvalidToken = () => {
     removeToken(); // Clear the token
     setUser(null); // Optional: If you're tracking user state
-    navigate("/login"); // Redirect to login
+    navigate("/signin"); // Redirect to signin page
   };
 
   return (
