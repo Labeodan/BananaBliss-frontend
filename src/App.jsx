@@ -13,7 +13,6 @@ import Orders from "./pages/Orders/Orders";
 import Admin from "./pages/Admin/Admin";
 import Error from "./pages/Error/Error";
 import ProductManager from "./pages/Admin/ProductManager";
-// import Loading from "./pages/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "./utils/token";
 import { Toaster } from "react-hot-toast";
@@ -26,9 +25,20 @@ function App() {
   const [loading, setLoading] = useState(true)
   const username = user?.username || user?.email;
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState({})
+  const [, setError] = useState({}) //i have to find a way to display the error if when they occur; when that happens i will use this state, by adding error to the useEffect dependencies
   const navigate = useNavigate()
+
+  
+  
   useEffect(() => {
+    const handleInvalidToken = () => {
+      removeToken(); // Clear the token
+      setUser(null); // Optional: If you're tracking user state
+      navigate("/signin"); // Redirect to signin page
+    };
+
+
+    // This function attempts to get all he products from the database
     const getAllProducts = async () => {
       try {
         setLoading(true);
@@ -45,26 +55,30 @@ function App() {
           setError(err.response?.data || "An error occurred.");
         }
       } finally {
+        // if the request is successful it sets the loading screen to false.
         setLoading(false);
       }
     };
 
     getAllProducts();
-    
-  }, []);
+  
+  // the next line is used to disable the eslint warning that the useEffect dependencies are missing; only use it when you are sure that you don't need to add any dependencies
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
-  const handleInvalidToken = () => {
-    removeToken(); // Clear the token
-    setUser(null); // Optional: If you're tracking user state
-    navigate("/signin"); // Redirect to signin page
-  };
+
+
+
 
   return (
     <>
+    {/* nav bar and toasts are outside the routes because they need to show up on every page */}
       <Navbar user={username} setUser={setUser} />
       <Toaster position="top-right"/>
+
       <Routes>
-        {/* <Route path="/loading" element={<Loading />}/> */}
+
+        {/* the landing page id displayed dynamically depending on wether an admin is logged in or a regular user */}
         <Route
           path="/"
           element={
@@ -79,10 +93,11 @@ function App() {
               path="/menu/:breadId"
               element={<Breadshow products={products} />}
             ></Route>
-            <Route path="/productmanager" element={<ProductManager />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/checkout" element={<Checkout />}/>
+            {/* only admins can view the product manager page */}
+            {user?.role === "admin"? <Route path="/productmanager" element={<ProductManager />} /> : null}
           </>
         ) : (
           <>
