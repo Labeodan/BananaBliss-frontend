@@ -13,6 +13,7 @@ function Bread({ product, openEditModal, handleDeleteProduct}) {
   const user = getUser();
   const { addItem } = useCart();
 
+
   const addToCart = (product) => {
     if (user === null) {
       navigate("/signin");
@@ -33,23 +34,16 @@ function Bread({ product, openEditModal, handleDeleteProduct}) {
 
   return (
     <>
-      <div
-        className={styles.productCard}
-      >
-        <img src={product.image} alt={product.name} />
+        <div className={styles.productCard}>
+        <img src={product.image} alt={product.name}/>
         <h3>{product.name}</h3>
         <p>{product.description}</p>
         <div className={styles.price}>
-          {/* {product.originalPrice && (
-            <span className={styles.originalPrice}>
-              {product.originalPrice}
-            </span>
-          )} */}
           ${product.price}
         </div>
         {user && user.role === "admin"?
         (
-            <>
+          <>
             {presentPath !== "/productmanager"? (
               <button onClick={()=> handleNavigate(product.id)}>View</button>
               
@@ -62,7 +56,7 @@ function Bread({ product, openEditModal, handleDeleteProduct}) {
             )}
             </>
         ):(
-            <>
+          <>
             <button onClick={()=> handleNavigate(product.id)}>View</button>
             <button onClick={() => addToCart(product)}>Add to cart</button>
             </>

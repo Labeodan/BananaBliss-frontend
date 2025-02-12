@@ -31,12 +31,6 @@ html,body {
 }
 
 
-// }
-#root {
-  // min-height: 100vh; // Ensures full viewport height
-}
-
-
 
 // * Typography
 
@@ -139,7 +133,7 @@ p {
 .productGallery {
     display: grid;
     margin: auto;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
@@ -150,4 +144,28 @@ button {
     text-decoration: none;
     border-radius: 4px;
     transition: background 0.3s;
+}
+
+
+.skeleton {
+  // display: inline-block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(-90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 400% 400%;
+  animation: pulse 1.2s ease-in-out infinite;
+  border-radius: 4px;
+  border: 1px solid #f4d19a;
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
