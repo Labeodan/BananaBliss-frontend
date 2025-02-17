@@ -30,6 +30,7 @@ function Cart() {
 
   const handleCheckout = () => {
     if (isEmpty) return toast.error("Your cart is empty!");
+  
     // Save the order API
     const orderData = {
       order_products: productsInOrder,
@@ -39,22 +40,25 @@ function Cart() {
      
     };
     // Create in Db
-    const order =  async () => {
-      try {
-        const createSingleOrder = await createOrder(orderData)
-        console.log(createSingleOrder)
-        // Clear the cart
-        // emptyCart();
-        // toast.success("Order Created", {icon: '🍌'})
-        // Navigate to Order Status page
-        navigate(`/checkout`);
-      } catch (error) {
-        toast.error("Error Creating Order")
-        console.log("error creating order")
-        console.log(error)
-        
+    const order = async () => {
+      toast.promise(
+      createOrder(orderData),
+      {
+        loading: 'Creating order...',
+        success: 'Order Created!',
+        error: 'Error Creating Order',
       }
-    } 
+      ).then(createSingleOrder => {
+      console.log(createSingleOrder);
+      // Clear the cart
+      // emptyCart();
+      // Navigate to Order Status page
+      navigate(`/checkout`);
+      }).catch(error => {
+      console.log("error creating order");
+      console.log(error);
+      });
+    }
 
     order()
   
@@ -73,7 +77,8 @@ function Cart() {
   if (isEmpty) return <p className={styles.emptyMessage}>Your cart is empty</p>;
 
   return (
-    <section className={styles.cartContainer}>
+    <div className={styles.cover}>
+      <section className={styles.cartContainer}>
       <h1>Your Cart</h1>
       {items.map((item) => (
         <div className={styles.cartItem} key={item.id}>
@@ -107,6 +112,7 @@ function Cart() {
         <button onClick={handleCheckout} className={styles.checkoutButton}>Proceed to Checkout</button>
       </div>
     </section>
+    </div>
   );
 }
 

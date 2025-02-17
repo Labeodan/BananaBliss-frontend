@@ -1,8 +1,16 @@
 
 /* Body Styling */
+
+.cover {
+  width: 100%;
+  height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cartContainer {
     max-width: 1000px;
-    // margin: auto;
     padding: 2rem;
     background-color: #f9f3e9;
     font-family: Arial, sans-serif;
